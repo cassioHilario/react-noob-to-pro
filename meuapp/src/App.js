@@ -1,16 +1,19 @@
 import React from 'react';
 
 
-const HelloWord = () => {
+const Team = (props) => {
   return(
-    <h1>Hello World</h1>
+    <div>
+      <h2>Hi, I'm {props.name}</h2>
+      <p>I'm a {props.occupation} and I'm {props.age} years old.</p>
+      <LinkedIn linkedIn={props.linkedIn} />
+    </div>
   )
 }
 
-
-const Welcome = (props) => {
+const LinkedIn = (props) => {
   return(
-    <h3>Welcome, {props.name}</h3>
+    <p>Connect with me via <a href={props.linkedIn} target="_blank">LinkedIn</a></p>
   )
 }
 
@@ -18,9 +21,10 @@ const Welcome = (props) => {
 export default function App(){
   return(
     <div>
-      <HelloWord />
-      <h2>Desenvolvendo meu primeiro App React.</h2>
-      <Welcome name="Cassio" />
+      <h1>Meet out Team:</h1>
+      <Team name="John" occupation="Developer" age="25" linkedIn="https://www.linkedin.com/in/john" />
+      <Team name="Jane" occupation="Designer" age="22" linkedIn="https://www.linkedin.com/in/jane" />
+      <Team name="Joe" occupation="Product Manager" age="27" linkedIn="https://www.linkedin.com/in/joe" />
     </div>
   )
 }

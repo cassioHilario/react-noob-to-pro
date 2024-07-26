@@ -1,34 +1,47 @@
 import React, {Component} from 'react';
 
+class App extends Component {
 
-class Team extends Component {
-  render(){
-    return(
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0
+    };
+
+    this.sum = this.sum.bind(this);
+    this.subtract = this.subtract.bind(this);
+
+  }
+
+  sum() {
+    let state = this.state;
+    state.counter += 1;
+    this.setState(state);
+  }
+
+  subtract() {
+    if (this.state.counter === 0) {
+      return;
+    }
+    let state = this.state;
+    state.counter -= 1;
+    this.setState(state);
+  }
+
+  render() {
+    return (
       <div>
-        <h2>Hi, I'm {this.props.name}</h2>
-        <p>I'm a {this.props.occupation} and I'm {this.props.age} years old.</p>
-        <LinkedIn linkedIn={this.props.linkedIn} />
+        <h1>Counter</h1>
+
+        <h3>
+          <button onClick={this.subtract}>-</button>
+          {this.state.counter}
+          <button onClick={this.sum}>+</button>
+        </h3>
+
       </div>
-    )
+    );
   }
 }
 
-class LinkedIn extends Component {
-  render(){
-    return(
-      <p>Connect with me on <a href = {this.props.linkedIn}>LinkedIn</a></p>
-    )
-  }
-}
-
-
-export default function App(){
-  return(
-    <div>
-      <h1>Meet out Team:</h1>
-      <Team name="John" occupation="Developer" age="25" linkedIn="https://www.linkedin.com/in/john" />
-      <Team name="Jane" occupation="Designer" age="22" linkedIn="https://www.linkedin.com/in/jane" />
-      <Team name="Joe" occupation="Product Manager" age="27" linkedIn="https://www.linkedin.com/in/joe" />
-    </div>
-  )
-}
+export default App;

@@ -5,18 +5,33 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      name: '',
-      gender: [
-        { id: 1, text: 'Male'},
-        { id: 2, text: 'Female'},
-        { id: 3, text: 'Other'}
-      ],
-      selectedGender: '',
-      age: '',
-      rememberMe: false
+      form:{
+        email: '',
+        password: '',
+        name: '',
+        gender: [
+          { id: 0, text: 'Select...'},
+          { id: 1, text: 'Male'},
+          { id: 2, text: 'Female'},
+          { id: 3, text: 'Other'}
+        ],
+        selectedGender: '',
+        age: '',
+        rememberMe: false
+      }
     };
+    this.onFormFildChange = this.onFormFildChange.bind(this);
+  }
+
+  onFormFildChange = (e) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value,
+        selectedGender: e.target.value
+        
+      }
+    });
   }
 
   render() {
@@ -26,26 +41,26 @@ class App extends Component {
         <form onSubmit={(e) => e.preventDefault()}>
           <label>
             Email: 
-            <input type="email" name="email" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
+            <input type="email" name="email" value={this.state.form.email} onChange={this.onFormFildChange} />
           </label>
           <br />
           <br />
           <label>
             Password: 
-            <input type="password" name="password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+            <input type="password" name="password" value={this.state.form.password} onChange={this.onFormFildChange} />
           </label>
           <br/>
           <br/>
           <label>
             Name: 
-            <input type="text" name="name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+            <input type="text" name="name" value={this.state.form.name} onChange={this.onFormFildChange} />
           </label>
           <br />
           <br />
           <label>
             Gender:
-            <select value={this.state.selectedGender} onChange={(e) => this.setState({selectedGender: e.target.value})}>
-              {this.state.gender.map((option) => (
+            <select value={this.state.form.selectedGender} onChange={this.onFormFildChange}>
+              {this.state.form.gender.map((option) => (
                 <option key={option.id} value={option.text}>{option.text}</option>
               ))}
             </select>
@@ -54,13 +69,13 @@ class App extends Component {
           <br />
           <label>
             Age:
-            <input type="number" name="age" value={this.state.age} onChange={(e) => this.setState({ age: e.target.value })} />
+            <input type="number" name="age" value={this.state.form.age} onChange={(e) => this.setState({ age: e.target.value })} />
           </label>
           <br />
           <br />
           <label>
             Remember Me:
-            <input type="checkbox" name="rememberMe" checked={this.state.rememberMe} onChange={(e) => this.setState({ rememberMe: e.target.checked })} />
+            <input type="checkbox" name="rememberMe" checked={this.state.form.rememberMe} onChange={(e) => this.setState({ rememberMe: e.target.checked })} />
           </label>
           <br />
           <br />

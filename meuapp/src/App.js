@@ -29,10 +29,12 @@ class App extends Component {
         ...this.state.form,
         [e.target.name]: e.target.value,
         selectedGender: e.target.value
-        
+
       }
     });
   }
+
+  //TODO: Need to work on form object select and checkbox update
 
   render() {
     return (

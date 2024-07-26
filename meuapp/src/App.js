@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import Feed from './components/Feed';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      status: true
+      feed: [
+        {id: 1, username: 'Mathew', likes: 10, comments: 2},
+        {id: 2, username: 'Mark', likes: 120, comments: 52},
+        {id: 3, username: 'Luke', likes: 200, comments: 20},
+        {id: 4, username: 'John', likes: 500, comments: 100},
+      ]
     };
   }
 
@@ -13,21 +19,11 @@ class App extends Component {
     return (
       <div>
         
-        {this.state.status 
-          ?
-
-          <div>
-            <h1>Hello Cassio!</h1>
-            <button onClick={() => this.setState({status: false})}>Logout</button>
-          </div>
-
-          :
-          
-          <div>
-            <h1>Hello World!</h1>
-            <button onClick={() => this.setState({status: true})}>Login</button>
-          </div>
-        }
+        {this.state.feed.map((item) => {
+          return (
+            <Feed key={item.id} username={item.username} likes={item.likes} comments={item.comments} />
+          );
+        })}
 
       </div>
     );

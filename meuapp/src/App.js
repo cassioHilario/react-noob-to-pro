@@ -24,17 +24,16 @@ class App extends Component {
   }
 
   onFormFildChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const isCheckbox = type === 'checkbox';
+
     this.setState({
       form: {
         ...this.state.form,
-        [e.target.name]: e.target.value,
-        selectedGender: e.target.value
-
+        [name]: isCheckbox ? checked : value
       }
     });
   }
-
-  //TODO: Need to work on form object select and checkbox update
 
   render() {
     return (
@@ -61,7 +60,7 @@ class App extends Component {
           <br />
           <label>
             Gender:
-            <select value={this.state.form.selectedGender} onChange={this.onFormFildChange}>
+            <select name="selectedGender" value={this.state.form.selectedGender} onChange={this.onFormFildChange}>
               {this.state.form.gender.map((option) => (
                 <option key={option.id} value={option.text}>{option.text}</option>
               ))}
@@ -71,13 +70,13 @@ class App extends Component {
           <br />
           <label>
             Age:
-            <input type="number" name="age" value={this.state.form.age} onChange={(e) => this.setState({ age: e.target.value })} />
+            <input type="number" name="age" value={this.state.form.age} onChange={this.onFormFildChange} />
           </label>
           <br />
           <br />
           <label>
             Remember Me:
-            <input type="checkbox" name="rememberMe" checked={this.state.form.rememberMe} onChange={(e) => this.setState({ rememberMe: e.target.checked })} />
+            <input type="checkbox" name="rememberMe" checked={this.state.form.rememberMe} onChange={this.onFormFildChange} />
           </label>
           <br />
           <br />

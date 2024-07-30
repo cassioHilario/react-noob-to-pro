@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
 
   const [tasks, setTasks] = useState([...returnStoredTaskList()]);
   
   const [newTask, setNewTask] = useState('');
+
+  // Behaves like shouldComponentUpdate, preventing unnecessary re-renders
+  const totalTasks = useMemo(() => tasks.length, [tasks]);
 
   // Behaves like componentDidMount
   useEffect(() => {
@@ -43,6 +46,9 @@ function App() {
       </ul>
       <input type='text' value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
       <button type='button' onClick={handleAddTask}>Add task</button>
+      <br/>
+      <br/>
+      <strong>Remaining Tasks: {totalTasks}</strong>
     </div>
   );
 }

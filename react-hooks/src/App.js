@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
 
@@ -8,6 +8,11 @@ function App() {
 
   // Behaves like shouldComponentUpdate, preventing unnecessary re-renders
   const totalTasks = useMemo(() => tasks.length, [tasks]);
+  
+  const handleAddTask = useCallback(() =>{
+    setTasks([...tasks, newTask]);
+    setNewTask('');
+  });
 
   // Behaves like componentDidMount
   useEffect(() => {
@@ -23,11 +28,6 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     return () => {};
   }, [tasks]);
-
-  function handleAddTask(){
-    setTasks([...tasks, newTask]);
-    setNewTask('');
-  }
 
   function returnStoredTaskList(){
     const storedTasks = localStorage.getItem('tasks');
